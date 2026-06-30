@@ -115,11 +115,14 @@ def main():
             href = detail_a.get("href", "")
             detail_link = f"https://ssr1.scrape.center{href}" if href.startswith("/") else href
             
-        # Poster local path relative to project root
-        poster_md_path = f"posters/resized/movie_{idx}.jpg"
-        
+        # Get remote high-quality cover URL instead of local path (since posters/ is ignored by Git and not uploaded)
+        cover_img = card.select_one("img.cover")
+        cover_url = cover_img.get("src", "") if cover_img else ""
+        if cover_url and "@" in cover_url:
+            cover_url = cover_url.split("@")[0]
+            
         # Format poster tag (HTML format for sizing in markdown)
-        poster_tag = f'<img src="{poster_md_path}" width="40" alt="{title_cn}">'
+        poster_tag = f'<img src="{cover_url}" width="40" alt="{title_cn}">'
         
         # Title link
         title_link = f"[{title_cn}]({detail_link})" if detail_link else title_cn
