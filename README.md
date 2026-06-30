@@ -1,15 +1,49 @@
-# Movie Scraping Project
+# Movie Scraping Project & AI Assistant
 
-This project scrapes movie data from [Scrape Center (SSR1)](https://ssr1.scrape.center/page/1), downloads and resizes the movie posters, and exports them into various formats including Markdown, CSV, and Excel.
+An elegant, fully-featured movie catalog web application that crawls pages, exports structured data, and embeds an interactive AI chat assistant.
+
+🚀 **Live Demo**: [https://scrape-movie.vercel.app/](https://scrape-movie.vercel.app/)
+
+## Key Features
+- 🕷️ **Crawl All Movies**: Overwrites the basic page 1 scraper to traverse all 10 pages of [Scrape Center (SSR1)](https://ssr1.scrape.center/) and fetch all 100 classic movies.
+- 🖼️ **High-Resolution Media**: Automatically strips CDN compression parameters to download high-resolution posters and downsamples crisp local thumbnails.
+- 📊 **Excel Integration**: Generates a custom-formatted `movies_with_posters.xlsx` spreadsheet containing the full metadata and compact poster thumbnails embedded directly in cell rows.
+- ⚡ **FastAPI Backend**: Serves API data routes, direct Excel download paths, and host routes in Python.
+- 🎨 **Premium UI**: Single Page Application styled with responsive vanilla CSS, featuring glassmorphism, fluid scaling, rating badges, search/filter panels, and light/dark theme toggles.
+- 🤖 **Gemini 2.5 Flash AI Assistant**: Interactive floating chat widget allowing natural language conversation about the movie database, with graceful offline rules fallback.
+- ☁️ **Vercel Serverless Ready**: Packaged configuration files for seamless Python ASGI deployment.
 
 ## Project Structure
-- `scrape.py`: Scrapes the webpage and saves the raw HTML as `page1.html`.
-- `parse_movies.py`: Parses the HTML and saves the movie details into `movies.csv` and `movies.md`.
-- `create_excel.py`: Downloads posters, resizes them, and inserts them into an Excel workbook (`movies_with_posters.xlsx`).
-- `movies_with_posters.xlsx`: The final generated Excel spreadsheet with embedded poster images.
-- `README.md`: This file, showing all the movie cards details and poster thumbnails.
+- `scrape.py`: Crawls all pages and saves the combined HTML into `page1.html`.
+- `parse_movies.py`: Parses the HTML and generates `movies.csv` and `movies.md`.
+- `create_excel.py`: Downloads posters, generates thumbnails, and builds `movies_with_posters.xlsx`.
+- `main.py`: FastAPI server handling endpoints, static mounts, and Gemini API chatbot logic.
+- `vercel.json` & `requirements.txt`: Vercel serverless deployment specifications.
+- `README.md`: This file, detailing the project and showing the compiled movie database.
 
-## Scraped Movie List (Page 1)
+## Getting Started Locally
+
+1. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. **Scrape & Parse Data**:
+   ```bash
+   python scrape.py
+   python create_excel.py
+   python parse_movies.py
+   ```
+3. **Configure API Key (Optional)**:
+   Create a `.env` file in the root folder and add your Gemini key:
+   ```env
+   GEMINI_API_KEY=your-api-key-here
+   ```
+4. **Launch Server**:
+   ```bash
+   python -m uvicorn main:app --reload
+   ```
+
+## Scraped Movie List (Page 1-10)
 
 | Poster | Chinese Title | English / Original Title | Categories | Regions / Countries | Duration | Release Date | Score |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :---: |
