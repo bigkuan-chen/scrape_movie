@@ -1,0 +1,6 @@
+fastapi
+beautifulsoup4
+openpyxl
+pillow
+google-genai
+requests
