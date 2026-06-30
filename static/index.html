@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrapeMovie - Premium Movie DB</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Glassmorphic Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fa-solid fa-clapperboard logo-icon"></i>
+                <span class="logo-text">Scrape<span class="logo-highlight">Movie</span></span>
+            </div>
+            
+            <nav class="nav-actions">
+                <button id="download-excel-btn" class="btn btn-primary btn-icon" onclick="downloadExcel()">
+                    <i class="fa-solid fa-file-excel"></i>
+                    <span>Download Excel</span>
+                </button>
+                <button id="theme-toggle" class="btn btn-secondary btn-circle" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon theme-icon-dark"></i>
+                    <i class="fa-solid fa-sun theme-icon-light" style="display: none;"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+        <!-- Controls Panel -->
+        <section class="controls-panel">
+            <div class="search-bar-container">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="search-input" placeholder="Search by title, region or duration..." autocomplete="off">
+                <button id="search-clear-btn" class="search-clear-btn" style="display: none;">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="filters-container">
+                <div class="select-wrapper">
+                    <i class="fa-solid fa-filter select-icon"></i>
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                
+                <div class="select-wrapper">
+                    <i class="fa-solid fa-sort select-icon"></i>
+                    <select id="sort-select">
+                        <option value="default">Default Order</option>
+                        <option value="score-desc">Rating: High to Low</option>
+                        <option value="score-asc">Rating: Low to High</option>
+                        <option value="release-desc">Release Date: Newest</option>
+                        <option value="release-asc">Release Date: Oldest</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-panel">
+            <div class="stats-text" id="stats-text">Loading movies...</div>
+        </section>
+
+        <!-- Movie Loader -->
+        <div id="loader" class="loader-container">
+            <div class="loader-spinner"></div>
+            <p>Fetching movies from database...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="empty-state-container" style="display: none;">
+            <i class="fa-solid fa-film empty-icon"></i>
+            <h3>No Movies Found</h3>
+            <p>We couldn't find any movies matching your search query or filter. Try a different search term!</p>
+            <button class="btn btn-secondary btn-sm" onclick="resetFilters()">Reset Filters</button>
+        </div>
+
+        <!-- Movie Card Grid -->
+        <section id="movies-grid" class="movies-grid" style="display: none;">
+            <!-- Rendered dynamically by JS -->
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 ScrapeMovie. Built using FastAPI &amp; Vanilla CSS.</p>
+    </footer>
+
+    <!-- Chat Widget Bubble -->
+    <div class="chat-widget" id="chat-widget">
+        <!-- Floating Toggle Button -->
+        <button class="chat-toggle-btn" id="chat-toggle-btn" aria-label="Open Chat">
+            <i class="fa-solid fa-comments"></i>
+            <span class="chat-badge">AI</span>
+        </button>
+        
+        <!-- Chat Window -->
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <i class="fa-solid fa-robot chat-bot-icon"></i>
+                    <div>
+                        <h4>Movie Assistant</h4>
+                        <span class="chat-status"><span class="status-dot"></span>Online</span>
+                    </div>
+                </div>
+                <button class="chat-close-btn" id="chat-close-btn" aria-label="Close Chat">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">
+                    Hi! I am your AI Movie Assistant. How can I help you today?
+                </div>
+                <div class="chat-suggestions">
+                    <button class="suggestion-tag" onclick="sendSuggestion('Recommend a movie')">🎲 Recommend a movie</button>
+                    <button class="suggestion-tag" onclick="sendSuggestion('What is the top rated movie?')">⭐ Top Rated</button>
+                    <button class="suggestion-tag" onclick="sendSuggestion('Show me action movies')">💥 Action Movies</button>
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+                <button id="chat-send-btn" class="chat-send-btn" aria-label="Send Message">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

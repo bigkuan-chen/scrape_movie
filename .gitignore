@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Excel temporary / lock files
+~$*.xlsx
+
+# Sensitive environment variables
+.env
+
+# Large scraped cache data
+# page1.html
+# page.html
+
+# Generated dataset exports
+# movies.csv
+# movies.md
+# movies_with_posters.xlsx
+# movies.xlsx
+
+# Downloaded movie poster assets
+posters/
